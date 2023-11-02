@@ -7,6 +7,7 @@ public class Filosofo extends Thread {
     private int comensal;
     private int estomago;
     private long tiempoPensado;
+    private long tiempoComiendo;
 
     public Filosofo(Mesa m, int comensal) {
         this.mesa = m;
@@ -32,7 +33,8 @@ public class Filosofo extends Thread {
 
     public void mostrarDatos() {
         System.out.println("Filosofo " + comensal + " estomago: " + this.estomago);
-        System.out.println("Filosofo " + comensal + " tiempo pensando: " + this.tiempoPensado);
+        System.out.println("Filosofo " + comensal + " tiempo comiendo: " + this.tiempoComiendo + " seg");
+        System.out.println("Filosofo " + comensal + " tiempo pensando: " + this.tiempoPensado + " seg");
     }
 
     public void pensando() {
@@ -41,9 +43,8 @@ public class Filosofo extends Thread {
             inicio = System.currentTimeMillis();
             sleep(generarNumeroAleatorio(1000, 5000));
             fin = System.currentTimeMillis();
-        } catch (InterruptedException ex) {
-            // Maneja la excepción si es necesario
-        }
+        } catch (InterruptedException ex) {}
+        
         long tiempoPensadoActual = (fin - inicio);
         System.out.println("Filosofo " + comensal + " esta pensando: " 
         + (tiempoPensadoActual/1000)+ "seg");
@@ -52,14 +53,20 @@ public class Filosofo extends Thread {
     }
 
     public void comiendo() {
+    	long inicio = 0, fin = 0;
         int numeroFideos = generarNumeroAleatorio(1, 4);
         this.mesa.comerFideos(numeroFideos);
         System.out.println("Filosofo " + comensal + " incremento valor de estomago :" + "("  + this.estomago + "+" +  +numeroFideos + "=" + (this.estomago + numeroFideos) + ")");
         this.estomago += numeroFideos;
         try {
+        	inicio = System.currentTimeMillis();
             sleep(generarNumeroAleatorio(1000, 5000));
-        } catch (InterruptedException ex) {
-            // Maneja la excepción si es necesario
-        }
+            fin = System.currentTimeMillis();
+        } catch (InterruptedException ex) {}
+        
+        long tiempoComiendoActual = (fin - inicio);
+        System.out.println("Filosofo " + comensal + " esta comiendo: "
+        + (tiempoComiendoActual/1000)+ "seg");
+        this.tiempoComiendo += tiempoComiendoActual/1000;
     }
 }

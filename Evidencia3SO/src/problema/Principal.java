@@ -18,7 +18,7 @@ public class Principal {
                 e.printStackTrace();
             }
         }
-
+        System.out.println("\n\tEstadisticas");
         System.out.println("Estado del plato de fideos: " + m.getFideos());
         for (int i = 0; i < 5; i++) {
             f[i].mostrarDatos();

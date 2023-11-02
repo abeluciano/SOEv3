@@ -58,6 +58,9 @@ public class Mesa {
     }
 
     public synchronized int getFideos() {
+    	if (fideos < 0) {
+    		return 0;
+    	}
         return fideos;
     }
 
