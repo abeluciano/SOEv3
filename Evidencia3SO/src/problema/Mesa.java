@@ -7,7 +7,6 @@ public class Mesa {
     private boolean[] tenedores;
     private int fideos;
     private boolean fideosAgotados;
-    private Object lock = new Object();
 
     public Mesa(int numTenedores, int cantidadFideos) {
         this.tenedores = new boolean[numTenedores];
